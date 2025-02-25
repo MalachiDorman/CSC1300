@@ -81,7 +81,7 @@ int main() {
                         }
                         cout << "\nAnd so you return to the tent, to wash the blood from your hands.";
 
-                    } else if (user_input.find("befriend") != string::npos) { // TODO: add in the appropriate string function condition
+                     else if (user_input.find("befriend") != string::npos) { // TODO: add in the appropriate string function condition
                         if(bear_friend) {
                             cout << "\nYou're getting a little too friendly with the bear...It's making them uncomfortable.";
                         } else {
@@ -102,9 +102,10 @@ int main() {
                         cout << "I did not understand your choice (hint: use the keywords fight, befriend, or run away)." << endl;
                         cout << "What would you like to do? ";
                     }
-                } while (user_input.find("fight") != string::npos && user_input.find("befriend") != string::npos 
-                && user_input.find("befriend") != string::npos); // TODO: add in the appropriate string function condition
-            break;
+                 while (user_input.find("fight") != string::npos && user_input.find("befriend") != string::npos 
+                && user_input.find("run") != string::npos); // TODO: add in the appropriate string function condition
+                }
+                break;
 
             case 'S':
                 cout << "\n\nYou're walking. And walking. And walking.\nAnd then the wolves came...(if you understand that reference, congrats!)" << endl;
@@ -172,7 +173,7 @@ int main() {
                     getline(cin, user_input);
 
                     // TODO: add in the appropriate string function condition
-                    if (user_input.find("fight") != string::npo) {
+                    if (user_input.find("fight") != string::npos) {
                         while (lady_hit > 0 && you_hit > 0) {
                             cout << "\nYou attack the fortune teller!";
                             lady_hit = lady_hit - (rand() % 101);
@@ -190,7 +191,7 @@ int main() {
                             cout << "\n\nAs the fortune teller lay dying, she tells you that your biggest weakness is your lack of emotional vulnerability.";
                             cout << "\nYou walk away from the crime (avoidant, as always). The fortune teller gets back up behind you as she had only faked her death to get you to go away.";
                         }
-                    } else if (user_input.find("adopt") != string::npo) { // TODO: add in the appropriate string function condition
+                    } else if (user_input.find("adopt") != string::npos) { // TODO: add in the appropriate string function condition
                         cout << "\n\nYou've been adopted. Thankfully, this is a fictional rpg and there is no convoluted process.";
                         cout << "\nThe fortune teller describes stories of the great hero you would've become, your grand destiny.";
                         cout << "\nThen thanks you for throwing away your future to stay with her. Who cares about the fate of the world? You just needed a mother who loved you...";
@@ -201,7 +202,7 @@ int main() {
                         cout << "I did not understand your choice (hint: use the keywords fight or adopt)." << endl;
                         cout << "What would you like to do? ";
                     }
-                } while (user_input.find("fight") != string::npo && user_input.find("adopt") != string::npo ); // TODO: add in the appropriate string function condition
+                } while (user_input.find("fight") != string::npos && user_input.find("adopt") != string::npos ); // TODO: add in the appropriate string function condition
 
                 cout << "\n\nYou return to the tent. Unless you've found your forever home.";
             break;
@@ -215,7 +216,7 @@ int main() {
                     getline(cin, user_input);
 
                     // TODO: add in the appropriate string function condition
-                    if (user_input.find("explore") != string::npo) {
+                    if (user_input.find("explore") != string::npos) {
                         playing = false;
                         cout << "\nAs you explore the cave, you notice something strangely...human in one dark corner.";
                         cout << "\n\nIs that...";
@@ -227,7 +228,7 @@ int main() {
                             cout << "\nYou decide that, as punishment, you will sing the rest of the way home.";
                             cout << "\nAnd you all lived happily ever after.";
                         }
-                    } else if (user_input.find("continue") != string::npo) { // TODO: add in the appropriate string function condition
+                    } else if (user_input.find("continue") != string::npos) { // TODO: add in the appropriate string function condition
                         cout << "\n\nYou head deeper into the cave, ignoring the weird shadows and...is someone yelling your name?";
                         cout << "\nImpossible. You don't have a name. I didn't give you one.";
                         cout << "\n\nAs you continue on - OH FIDDLESTICKS IT'S A DRAGON!";
