@@ -19,6 +19,44 @@ using namespace std;
         then returned.
 */
 // TODO: add your hint function here
+string hint(int weapon, int room) {
+    ifstream file("hints.txt");
+    if (!file) {
+        return ""; // Just return an empty string if the file can't open
+    }
+
+    string line, category, hintText;
+    while (getline(file, line)) {
+        size_t delimiter = line.find('|');
+        if (delimiter == string::npos) {
+            continue;  // Skip invalid lines
+        }
+
+        category = line.substr(0, delimiter);  // Extract category (room/weapon)
+        hintText = line.substr(delimiter + 1); // Extract actual hint
+
+        // Convert room number to its corresponding string
+        string correctRoom;
+        if (room == 1) correctRoom = "Clement";
+        else if (room == 2) correctRoom = "Bruner";
+        else if (room == 3) correctRoom = "AIEB";
+
+        // Convert weapon number to its corresponding string
+        string correctWeapon;
+        if (weapon == 1) correctWeapon = "Computer charger";
+        else if (weapon == 2) correctWeapon = "Textbook";
+        else if (weapon == 3) correctWeapon = "Java Code";
+
+        // Check if the category matches the correct room or weapon
+        if (category == correctRoom || category == correctWeapon) {
+            file.close();
+            return hintText;  // Return the first matching hint
+        }
+    }
+
+    file.close();
+    return "No hints available.";
+}
 
 /*
     Function name: getGuess()
@@ -31,6 +69,59 @@ using namespace std;
         and false otherwise.
 */
 // TODO: add your guess function here
+bool getGuess(int correctSuspect, int correctRoom, int correctWeapon) {
+    int suspectGuess, roomGuess, weaponGuess;
+
+    // Get the suspect guess
+    cout << "\nOn that fateful day, you believe\n";
+    cout << "1. April Crockett\n2. Brandon Vandergriff\n3. A Kshitiz\n";
+    cout << "Who knocked out Awesome Eagle? Enter 1, 2, or 3: ";
+    cin >> suspectGuess;
+
+    while (suspectGuess < 1 || suspectGuess > 3) {
+        cout << "Invalid choice. Please enter 1, 2, or 3: ";
+        cin >> suspectGuess;
+    }
+
+    // Get the room guess
+    cout << "\nYou think the suspect followed Awesome Eagle into\n";
+    cout << "1. The tutoring lounge (CLEM 402)\n";
+    cout << "2. The classroom (BRUN 228)\n";
+    cout << "3. The lab room (AIEB 256)\n";
+    cout << "Enter 1, 2, or 3: ";
+    cin >> roomGuess;
+
+    while (roomGuess < 1 || roomGuess > 3) {
+        cout << "Invalid choice. Please enter 1, 2, or 3: ";
+        cin >> roomGuess;
+    }
+
+    // Get the weapon guess
+    cout << "\nThe suspect used a\n";
+    cout << "1. Computer charger\n";
+    cout << "2. Textbook\n";
+    cout << "3. The scariest thing known to man (Java Code)\n";
+    cout << "to knock Awesome Eagle out. Enter 1, 2, or 3: ";
+    cin >> weaponGuess;
+
+    while (weaponGuess < 1 || weaponGuess > 3) {
+        cout << "Invalid choice. Please enter 1, 2, or 3: ";
+        cin >> weaponGuess;
+    }
+
+    // Check if the user's guess is correct
+    if (suspectGuess == correctSuspect && roomGuess == correctRoom && weaponGuess == correctWeapon) {
+        cout << "\nCorrect! The criminal will be put away for good.\n";
+        return true;
+    } else {
+        cout << "\nMaybe you should have investigated more...\n";
+        cout << "The correct suspect was: " << correctSuspect << "\n";
+        cout << "The correct weapon was: " << correctWeapon << "\n";
+        cout << "The correct room was: " << correctRoom << "\n";
+        return false;
+    }
+}
+
 
 /*
     Function name: inspectRooms()
