@@ -2,7 +2,7 @@
     Author: Malachi Dorman
     Date: 3/20/2025
     File Name: change to clue.cpp
-    Purpose: 
+    Purpose: Clue game functions
 */
 #include <iostream>
 #include <fstream>
@@ -22,7 +22,7 @@ using namespace std;
 string hint(int weapon, int room) {
     ifstream file("hints.txt");
     if (!file) {
-        return ""; // Just return an empty string if the file can't open
+        return "";
     }
 
     string line, category, hintText;
@@ -109,7 +109,7 @@ bool getGuess(int correctSuspect, int correctRoom, int correctWeapon) {
         cin >> weaponGuess;
     }
 
-    // Check if the user's guess is correct
+    // Check if the guess is correct
     if (suspectGuess == correctSuspect && roomGuess == correctRoom && weaponGuess == correctWeapon) {
         cout << "\nCorrect! The criminal will be put away for good.\n";
         return true;
@@ -145,11 +145,13 @@ bool inspectRooms(bool& room1, bool& room2, bool& room3){
     cout << "Enter 1, 2, or 3: ";
     cin >> choice;
 
+    // Invalid Choice
     while (choice < 1 || choice > 3) {
         cout << "Invalid choice. Please enter 1, 2, or 3: ";
         cin >> choice;
     }
 
+    // Choice for room
     if (choice == 1 && !room1) {
         room1 = true;
         return true;
@@ -191,16 +193,18 @@ void interviewSuspects(bool& sus1, bool& sus2, bool& sus3, int suspect) {
     cout << "Enter 1, 2, or 3: ";
     cin >> choice;
 
+    // Invalid Choice
     while (choice == 1 || choice > 3){
         cout << "Invalid choice. Please enter 1, 2, or 3: ";
         cin >> choice;
     }
-
+    // Option if you have already interviewed
     if ((choice == 1 && sus1) || (choice == 2 && sus2) || (choice == 3 && sus3)) {
         cout << "\nYou have already interviewed this suspect.\n";
         return;
     }
 
+    // Choice for suspect
     if (choice == 1){
         sus1 = true;
     } else if (choice == 2){
@@ -209,6 +213,7 @@ void interviewSuspects(bool& sus1, bool& sus2, bool& sus3, int suspect) {
         sus3 = true;
     }
 
+    // If choice is suspect
     if (choice == suspect) {
         cout << "\nThat was a very suspicious interview...\n";
     } else {
@@ -237,7 +242,7 @@ int printMenu() {
     cout << "\nWhich do you do? ";
     cin >> choice;
 
-    // validate the user's choice
+    // Invalid Option
     while (choice < 1 || choice > 4) {
         cout << "That isn't procedure. Please choose 1, 2, or 3: ";
         cin >> choice;
