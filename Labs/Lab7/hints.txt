@@ -1,0 +1,24 @@
+AIEB|A feather was found near the AIEB pond
+AIEB|Awesome Eagle has lab on the day he was knocked out
+AIEB|No one in Bruner saw Awesome Eagle that day
+AIEB|No one in Clement saw Awesome Eagle that day
+AIEB|Awesome Eagle does not go to tutoring when he has questions
+Bruner|Awesome Eagle had his 1300 lecture on that day
+Bruner|Awesome Eagle does not have lab on the day he was knocked out
+Bruner|The tutors don't remember seeing Awesome Eagle that day
+Bruner|Awesome Eagle had a picture of him in lecture that day
+Bruner|No one saw Awesome Eagle in the AIEB that day
+Clement|Awesome Eagle was really struggling with his program, so he was planning on going to tutoring
+Clement|Awesome Eagle was marked absent from lecture on the day he was knocked out
+Clement|Aweseome Eagle skipped his lab on the day he was knocked out
+Clement|A feather was found in the elevator in CLEM
+Clement|A student took a picture with Awesome Eagle at office hours that day
+Computer charger|There were marks found on Awesome Eagle's neck.
+Computer charger|Awesome Eagle has no bumps or bruises.
+Computer charger|Awesome Eagle doesn't remember seeing anything as horrifying as Java Code.
+Textbook|There were no marks around Awesome Eagle's neck.
+Textbook|Awesome Eagle had a bump on his head.
+Textbook|Awesome Eagle doesn't remember seeing anything as horrifying as Java Code.
+Java Code|There were no marks around Awesome Eagle's neck.
+Java Code|Awesome Eagle had no bumps or bruises.
+Java Code|Awesome Eagle seemed to have a heart problem, indicating he saw something terrifying.

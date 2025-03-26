@@ -38,8 +38,10 @@ int main()
         cout << "Please choose 1-7: ";
         cin >> choice;
 
-        //validate menu choice
-        //////////////////////////////////////////////TODO: validate menu choice!!!//////////////////////////////////////////////
+        if (choice < 1 || choice > 7) {
+            cout << "Invalid choice. Enter a number 1-7.\n";
+            cin.clear();
+        }
 
         //switch statement to execute the user's choice
         switch (choice)
@@ -50,11 +52,11 @@ int main()
                 break;
             case 2:
                 //print all dragons that contain the word "fire" or "flame" in its name
-                //////////////////////////////////////////////TODO: call this function!!!//////////////////////////////////////////////
+                printDragonsWithFireOrFlame();
                 break;
             case 3:
                 //print all dragons under 19 years old
-                //////////////////////////////////////////////TODO: call this function!!!//////////////////////////////////////////////
+                printDragonsUnder19();
                 break;
             case 4:
                 //print all dragons that are suffering from something with "syndrome" in the name
@@ -62,7 +64,7 @@ int main()
                 break;
             case 5:
                 //register a new dragon in Scalebane Urgent Care Center
-                //////////////////////////////////////////////TODO: call this function!!!//////////////////////////////////////////////
+                registerNewDragon();
                 break;
             case 6:
                 //remove a dragon from the center
@@ -119,9 +121,9 @@ void printAllDragons()
 //Purpose: Print all dragons that contain the word "fire" or "flame" in its name
 //Input: None
 //Output: None
-
 void printDragonsWithFireOrFlame() 
 {
+    // DEFINE & OPEN INPUT FILES
     ifstream dragonTypeFile("Dragon-Type.txt");
     ifstream illnessDescFile("Illness-Description.txt");
     ifstream ageFile("Dragon-Age.txt");
@@ -129,12 +131,14 @@ void printDragonsWithFireOrFlame()
     int numDragons = 0;
     int dragonAge;
 
+    //IF INPUT FILES CAN'T BE OPENED, PRINT ERROR AND EXIT FUNCTION
     if(dragonTypeFile.fail() || illnessDescFile.fail() || ageFile.fail())
     {
         cout << "Error opening one of the three files.\n";
         return;
     }
 
+    //PRINT ALL THE DRAGONS WITH FIRE OR FLAME IN TYPE TO THE SCREEN
     cout << "\nDragons with \"fire\" or \"flame\" in its name\n";
     while(getline(dragonTypeFile, type,',') && getline(illnessDescFile, illness,',') && getline(ageFile, age,','))
     {
@@ -143,19 +147,55 @@ void printDragonsWithFireOrFlame()
             cout << setw(2) << ++numDragons << ": " << setw(28) << type << setw(30) << illness << setw(5) << age << endl;
         }
     }
+    
+
+
+    //CLOSE ALL THE FILES
+    dragonTypeFile.close();
+    illnessDescFile.close();
+    ageFile.close();
+    // FINAL OUTPUT
+    cout << "\n\nTotal number of dragons with \"fire\" or \"flame\" in its name: " << numDragons << endl;
 }
-
-
-
 
 //Function: printDragonsUnder19()
 //Purpose: Print all dragons under 19 years old
 //Input: None
 //Output: None
 
+void printDragonsUnder19() 
+{
+    //DEFINE & OPEN INPUT FILES
+    ifstream dragonTypeFile("Dragon-Type.txt");
+    ifstream illnessDescFile("Illness-Description.txt");
+    ifstream ageFile("Dragon-Age.txt");
+    string type, illness, age;
+    int dragonAge;
+    int numDragons = 0;
 
+    //IF INPUT FILES CAN'T BE OPENED, PRINT ERROR AND EXIT FUNCTION
+    if(dragonTypeFile.fail() || illnessDescFile.fail() || ageFile.fail())
+    {
+        cout << "Error opening one of the three files.\n";
+        return;
+    }
 
-//////////////////////////////////////////////TODO: write this function!!!//////////////////////////////////////////////
+    //PRINT ALL THE DRAGONS TO THE SCREEN IF THEY ARE UNDER 19 YO
+    cout << "\nDragons that are under 19 years old:\n";
+    while(getline(dragonTypeFile, type,',') && getline(illnessDescFile, illness,',') && getline(ageFile, age,','))
+    {   
+        int dragonAge = stoi(age);
+        if(dragonAge < 19) {
+            cout << setw(2) << ++numDragons << ": " << setw(28) << type << setw(30) << illness << setw(5) << age << endl;
+        }
+    }
+
+    //CLOSE ALL THE FILES
+    dragonTypeFile.close();
+    illnessDescFile.close();
+    ageFile.close();
+    cout << "\n\nTotal number of dragons that are 19 years or younger: " << numDragons << endl;
+}
 
 
 
@@ -202,11 +242,44 @@ void printDragonsWithSyndrome()
 //Input: None
 //Output: None
 
+void registerNewDragon() {
+    // Setup Output Files
+    ofstream dragonTypeFile("Dragon-Type.txt", ios::app); 
+    ofstream illnessDescFile("Illness-Description.txt", ios::app); 
+    ofstream ageFile("Dragon-Age.txt", ios::app);
+    // Vars
+    string type, illness, age;
+    int dragonAge;
+    // Failure to open
+    if(dragonTypeFile.fail() || illnessDescFile.fail() || ageFile.fail())
+    {
+        cout << "Error opening one of the three files.\n";
+        return;
+    }
+    // Enter details
+    cout << "Enter dragon type: ";
+    cin.ignore();
+    getline(cin, type);
+    cout << "Enter illness description: ";
+    getline(cin, illness);
+    cout << "Enter dragon age: ";
+    getline(cin, age);
+    // Write to files
+    dragonTypeFile << type << ",";
+    illnessDescFile << illness << ",";
+    ageFile << age << ",";
+    // Display success message
+    if (dragonTypeFile.good() && illnessDescFile.good() && ageFile.good()) {
+        cout << "New dragon registered successfully!\n";
+    } else {
+        cout << "Error: Failed to write.\n";
+    }
+    // Close files after printing
+    dragonTypeFile.close();
+    illnessDescFile.close();
+    ageFile.close();   
 
-//////////////////////////////////////////////TODO: write this function!!!//////////////////////////////////////////////
-
-
-
+}
 
 
 //Function: removeDragon()
