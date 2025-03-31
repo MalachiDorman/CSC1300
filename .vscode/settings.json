@@ -3,6 +3,10 @@
         "xstring": "cpp",
         "iostream": "cpp",
         "iosfwd": "cpp",
-        "cstdlib": "cpp"
-    }
+        "cstdlib": "cpp",
+        "ostream": "cpp",
+        "functional": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.default.compilerPath": "C:/mingw64/bin/g++.exe"
 }

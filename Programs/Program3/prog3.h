@@ -7,6 +7,8 @@
 *                                                     *
 *******************************************************/
 
+#ifndef PROG3_H
+#define PROG3_H
 
 #include <iostream>
 #include <fstream>
@@ -16,13 +18,12 @@
 
 using namespace std;
 
-const int maxPlay = 20;
-const int boardSpace = 25;
 
 void getPlayersNames(string names[], int numPlayers);
-int rollDice(string playerName);
+int rollDice(string names[], int numPlayers, int boardSpace[]);
 void playerFinishedBoard(string names[], int boardSpace[], double money[], int numPlayers);
-void activateActionOnSpace(string names[], int boardSpace[], double money[], int numPlayers, int currentPlayer);
+void activateActionOnSpace(string names[], int boardSpace[], double money[], int numPlayers);
 void printSmiley();
 void printFrown();
 
+#endif
