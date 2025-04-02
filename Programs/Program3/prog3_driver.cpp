@@ -26,8 +26,10 @@ int main(){
 
     cout << "WELCOME TO THE ONE PIECE BOARD GAME!\n" << endl;
     
+    // Do while loop to repeat game if player suggests
     do {
 
+        // Do while to check if inbetween 1-20 players
         do{ 
         cout << "\nHow many pirates are aboard? (Max 20): ";
         cin >> numPlayers;
@@ -56,7 +58,7 @@ int main(){
 
 
     // Roll Dice
-    //do{
+    
     rollDice(names, numPlayers, boardSpace);
     
 
@@ -65,10 +67,9 @@ int main(){
     playerFinishedBoard(names, boardSpace, money, numPlayers);
 
 
-    //}while(maxBoardSpace >= boardSpace[numPlayers]);
-
     bool invalidOptions = true;
 
+    // Do loop if player choose wrong option
     do{
     cout << "DO YOU WANT TO PLAY AGAIN?";
                 cout << "\n\n1. YES\n";
@@ -82,12 +83,13 @@ int main(){
                     break;
                 }
                 else if(selection == 2){
+                    cout << "T\n\nHANK YOU FOR PLAYING!";
                     playing = false;
                     break;
                 }
                 else{
                     cout << "\nNOT AN OPTION!\n\n";
-                    invalidOptions = false;
+                    invalidOptions = false; // Repeats the loop if player enters wrong option
                     playing = true;
                 }
             }while (invalidOptions = true);

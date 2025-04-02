@@ -16,17 +16,15 @@
 
 using namespace std;
 
-
-
 const int maxBoardSpace = 25;
 int random = 0;
 string good = "good.txt";
 string bad = "bad.txt";
 double moneyGen = 0.0;
-
 double money[] = {0.0};
 
 // Get player names
+
 void getPlayersNames(string names[], int numPlayers) {
     
     
@@ -37,6 +35,7 @@ void getPlayersNames(string names[], int numPlayers) {
     }
 }
 
+// Roll Dice Function
 
 int rollDice(string names[], int numPlayers, int boardSpace[]) {
     int i = 0 ;
@@ -44,8 +43,9 @@ int rollDice(string names[], int numPlayers, int boardSpace[]) {
     do {
     for(int i = 0; i < numPlayers; i++) { // Loop through all players
    
-   cout << names[i] << ", press ENTER to roll the die.\n";
+    cout << names[i] << ", press ENTER to roll the die.\n";
     cin.get(); // ENTER key press
+    cin.ignore();
     
     int dieRoll = rand() % 6 + 1; // Random number 1-6
 
@@ -53,6 +53,7 @@ int rollDice(string names[], int numPlayers, int boardSpace[]) {
   
 
     // Display dice face
+
     switch(dieRoll) {
         case 1:
             cout << " _________\n";
@@ -101,11 +102,15 @@ int rollDice(string names[], int numPlayers, int boardSpace[]) {
     cout << names[i] << " ROLLED A " << dieRoll << "!\n\n";
     cout << names[i] << " MOVED TO SPACE " << boardSpace[i] << "\n\n";
 
-    
+ 
+    // Calls activate function to update player boardspace
+
     activateActionOnSpace(names,boardSpace, money, numPlayers);
     
+    // Checks if max boardspace has been passed
+
     if (maxBoardSpace <= boardSpace[i]){
-        progress = false;
+        progress = false; // Sets loop to false if maxboardspace has been reached
         break;
     }
 
@@ -114,23 +119,26 @@ int rollDice(string names[], int numPlayers, int boardSpace[]) {
 return 0;
 }
 
-
+// Finish Board Function
 
 void playerFinishedBoard(string names[], int boardSpace[], double money[], int numPlayers){
     int highestSpace = -1;
     string highestPlayer;
     double highestMoney;
     string richestPlayer;
+
     for(int i = 0; i < numPlayers - 1; i++){
         if(boardSpace[i]> highestSpace){
             highestSpace = boardSpace[i];
-            highestPlayer = names[i];
+            highestPlayer = names[i]; // Determines who the highest player is
         }
 
         if(money[i] > highestMoney){
             highestMoney = money[i];
-            richestPlayer = names[i];
+            richestPlayer = names[i]; // Determines who the richest player is
         }
+
+        // Cout final statements if someone reached the end
 
         if(maxBoardSpace <= boardSpace[i]){
             cout << "\nYOU MADE IT TO THE GRAND LINE!\n\n";
@@ -146,11 +154,14 @@ void playerFinishedBoard(string names[], int boardSpace[], double money[], int n
 
 
 }
+
+// Function to open good/bad text and update money and boardsapce
+
 void activateActionOnSpace(string names[], int boardSpace[], double money[], int numPlayers) {
     
+    // Loop through all players
    
-    
-    for (int i = 0; i < numPlayers; i++) { // Loop through all players
+    for (int i = 0; i < numPlayers; i++) { 
 
         int goodBad = rand() % 2 + 1; // Random number 1-2 for good/bad actions
 
@@ -158,14 +169,19 @@ void activateActionOnSpace(string names[], int boardSpace[], double money[], int
         random = rand() % 20; // Random number for action selection
         moneyGen = rand() % 100000 + 1; // Random money gen
 
+
+        // If good
+
         if (goodBad == 1) {
             ifstream inFile(good); // Open good.txt
             string line;
             int lineNum = 0;
 
-            if (inFile.is_open()) {
+            if (inFile.is_open()) { // Checks if file is open
                 printSmiley();
                 cout << "GREAT! ";
+
+                // Loop to read until random line
 
                 while (getline(inFile, line)) {
                     if (lineNum == random) {
@@ -177,22 +193,25 @@ void activateActionOnSpace(string names[], int boardSpace[], double money[], int
                 cout << line << endl;
 
             // Add Money
+
             money[i] += moneyGen;
             cout << "ADDED " << moneyGen << " TO YOUR ACCOUNT!" << endl;
             cout << "YOU NOW HAVE " << money[i] << " IN YOUR ACCOUNT!" << endl;
 
             } break;
 
-            
+        // If bad
 
         } else if (goodBad == 2) {
             ifstream inFile(bad); // Open bad.txt
             string line;
             int lineNum = 0;
 
-            if (inFile.is_open()) {
+            if (inFile.is_open()) { // Check if file is open
                 printFrown();
                 cout << "OH NO! ";
+
+                // Loop to read until random line
 
                 while (getline(inFile, line)) {
                     if (lineNum == random) {
@@ -200,10 +219,11 @@ void activateActionOnSpace(string names[], int boardSpace[], double money[], int
                     }
                     lineNum++; // Increments to random line
                 }
-                getline(inFile, line);
+                getline(inFile, line); 
                 cout << line << endl;
 
             // Subract Money
+
             money[i] -= moneyGen;
             cout << "SUBTRACTED " << moneyGen << " FROM YOUR ACCOUNT!" << endl;
             cout << "YOU NOW HAVE " << money[i] << " IN YOUR ACCOUNT!" << endl;
