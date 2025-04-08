@@ -1,0 +1,20 @@
+a. How many cores does your proccessor have?
+10
+
+b. What was the computation time when you run the sequential.cpp program?
+0.0.85
+
+c. What was the computation time when you run your parallel.cpp program?
+0.095 seconds
+
+d. Now, change the number of threads to 1000 in parallel.cpp by changing the 30 to 1000 for the
+threads_wanted variable. Then, compile & run the program again. What was the computation time?
+2.23 seconds
+
+Now, change the number of threads to 2 in parallel.cpp by changing the 1000 to 2 for the
+threads_wanted variable. Then, compile & run the program again. What was the computation time?
+0.239 seconds
+
+f. The sample output was created with a computer that has 14 cores. Did you get the same numbers as the
+sample output? Why or why not?
+No I did not get the same time because my processor only has 10 cores to work in parallel with.

@@ -21,11 +21,6 @@ int main(){
     const int maxPlay = 20;
     int numPlayers=0;
 
-
-    // Welcome message
-
-    cout << "WELCOME TO THE ONE PIECE BOARD GAME!\n" << endl;
-    
     // Do while loop to repeat game if player suggests
     do {
 
