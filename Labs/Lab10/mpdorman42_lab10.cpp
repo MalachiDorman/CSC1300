@@ -9,7 +9,6 @@
 *******************************************************************************/
 
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 
 using namespace std;
@@ -23,6 +22,7 @@ int _petAge;
 int _petHunger;
 
 int selection;
+int random;
 
 // Pointer variables
 
@@ -57,7 +57,8 @@ do{
 		cout << "OOPS! Age must be a number greater than 0.\n";
 	}
 
-	}while (*petAge < 0);
+	}while (*petAge < 0); // Repeats until age is greater than zero
+
 
 	do {
 	cout << "Starting Hunger Level (0-10): ";
@@ -67,33 +68,40 @@ do{
 		cout <<"OOPS! Hunger level must be a number 0 through 10.";
 	}
 
-	}while(*petHunger > 10 || *petHunger < 0);
+	}while(*petHunger > 10 || *petHunger < 0); // Repeats until hunger is in valid range
 
-	// Print Menu
 
-	showMenu();
 	do{
+
+	// Print menu and ask for input
+	showMenu();
 	cin >> selection;
 
-	
+	// Change Pet Name
 	if(selection == 1){
 		changePetName(petName);
 	}
+	// Feed Pet
 	else if(selection == 2){
 		feedPet(petHunger, petName);
 	}
+	// Play with pet
 	else if(selection == 3){
-		
+		playWithPet(petHunger,petName);
 	}
+	// Pet birthday
 	else if(selection == 4){
-		
+		petBirthday(petAge);
 	}
+	// Show Pet Stats
 	else if(selection == 5){
-		
+		showPetStats(petName, petAge, petHunger);
 	}
+	// Quit Game
 	else if(selection == 6){
 		playing = false;
 	}
+	// Invalid Option
 	else{
 		cout << "Must Choose an opion between 1-6.";
 		break;
@@ -102,7 +110,7 @@ do{
 	}while(selection != 6); // Loop until user quits
 
 
-}while (playing == true);
+}while (playing == true); // Run game until user quits
 
     return 0;
 }
@@ -111,6 +119,7 @@ do{
 
 // Function Definition
 
+// Menu
 void showMenu(){
 	cout << "	Choose from the following options:\n";
 	cout << "	1) Change Pet Name\n";
@@ -123,30 +132,103 @@ void showMenu(){
 
 
 }
-
+// Change Pet Name
 void changePetName(string *petName){
 	cout << "\n\nWhat would you like to change your pet's name to?: ";
 	cin >> *petName;
-	cout << "Pet name successfully changed to " << *petName << "!\n\n";
+	cout << "\n\nPet name successfully changed to " << *petName << "!\n\n";
 }
-
+// Feed Pet
 void feedPet(int *petHunger, string *petName){
 	if(*petHunger == 8 || *petHunger == 8 || *petHunger == 10){
-		cout << "Whoa! You need to feed " << *petName << " more often! Their hunger level was " << *petHunger <<"!\n";
+		cout << "\n\nWhoa! You need to feed " << *petName << " more often! Their hunger level was " << *petHunger <<"!\n\n";
 	}
 	else if(*petHunger == 4 || *petHunger == 5 || *petHunger == 6 || *petHunger == 7){
-		cout << "It's feeding time for " << *petName << "! Their hunger level was " << *petHunger << "!\n";
+		cout << "\n\nIt's feeding time for " << *petName << "! Their hunger level was " << *petHunger << "!\n\n";
 	}
 	else if(*petHunger == 1 || *petHunger == 2 || *petHunger == 3){
-		cout << *petName << " you're a big back - eating again even though your hunger level is only " << *petHunger << ".\n";
+		cout << "\n\n" << *petName << " you're a big back - eating again even though your hunger level is only " << *petHunger << ".\n\n";
 	}
 	else if (*petHunger == 0){
-		cout << "Bruh, you get no food " << *petName << " - you are already full!\n";
+		cout << "\n\nBruh, you get no food " << *petName << " - you are already full!\n\n";
 	}
 	*petHunger = 0;
 }
-
+// Play with pet
 int playWithPet(int *petHunger, string *petName) {
+	srand(time(0));
+	random = rand() % 3 + 1; // Random number 1-3
 
+	*petHunger = *petHunger + random;
 
+	if(*petHunger > 10){
+		*petHunger = 10;
+	}
+
+	cout << "\n\n" << *petName << "'s hunger level is now " << *petHunger << " after play time.\n\n";
+	return 0;
+}
+// Pet Birthday
+void petBirthday(int *petAge){
+	*petAge = *petAge + 1;
+
+	cout << "\n\n\n                                            .=-..        .  .     .........                                             \n";
+    cout << "                                           ..=:.        .==..     ..---:...                                             \n";
+    cout << "                                          ......  ..    .....       ..-.--. .                                           \n";
+    cout << "                                                  .::.                ...::::..                                         \n";
+    cout << "                                                ..+:::.        ....                                                     \n";
+    cout << "                                       ....       ..+::..     ..++.                                                     \n";
+    cout << "                                     ..-===...    ...:+..     .=+-.   ...   ..:-...                                     \n";
+    cout << "                                     .-==.                    ...   ..-=... ..+++..                                     \n";
+    cout << "                                     ....                            .....   ..=+=.                                     \n";
+    cout << "                                                       ....  ....             .....                                     \n";
+    cout << "                                             ....    ..=##-..+*#..      ..                                              \n";
+    cout << "                                          ....::.    .-#+-=##-=+#.. . ..:.                                              \n";
+    cout << "                                          ...-..     .....+#%:...   . .--:.       . ........ ...                        \n";
+    cout << "                             .       .... ......        ..+=*:        .....       ..*#*++++*#*:. .                      \n";
+    cout << "                             .=%*+++*%*..               .-+==#.                  :%*==+++++++++%..                      \n";
+    cout << "                           .#+=========+#-.            .:#+++=+..        ..-#*++**++++++++++++++*=                      \n";
+    cout << "                         .=*=-===========+#           ..#+===+*=.       .=*+-++**+-=+++++++++++++*-..                   \n";
+    cout << "                        .=+=-==============%..        .*+++++++#.     ..#++-+++#+--=++++++++++++++%                     \n";
+    cout << "                       .:#=--==============+=.       .-*+=++-+=+*..   .#+--+++**=-=++++++++++++++*#:.                   \n";
+    cout << "                       .+=---==============+%.       .%+++=-+++=+=. ..++=--+++**+=+++++++++++++++**-                    \n";
+    cout << "                        *=--===============+#..   ...#*=-=+++==++#.  .*+--++++**++++++++++++++++**#:.                   \n";
+    cout << "                        +=================++%.. ...==*=+*+=+=++==+*:=.*+-++++++#+++++++++++++++***%..                   \n";
+    cout << "                       .-+===============+++#. .:#-+=-+###****###=-=*-%++++++++*#+++++++++++++***#-..                   \n";
+    cout << "                       ..#+============++++#:..++--%----------------#=-=#+++++++*#***+++++******#-..                    \n";
+    cout << "                       ...%++========+++++*-..#---=*----------------+=---%++++++++%************%..                      \n";
+    cout << "                         ..**++++++++++++#..-*-----#--=*=------=*=--#=----+*+++++++*##*****##+..                        \n";
+    cout << "                           ..##+++++++*%:...*------%--%-+------*:%--%------+**********#%**% ...                         \n";
+    cout << "                             ...=*++%.... ..#------#--*%*-+*++-=%%--%------##*******#=..*.. .                           \n";
+    cout << "                               ..:*:..    ...#+----*=-----+%%%------*----+%...****=....+:.                              \n";
+    cout << "                                 .=.         .#+===*=--=*-=**=-=+---#===+#.   ..*..   .*                                \n";
+    cout << "                                 .:-..       .*+==**-----#%+*##-----**===#    ..*..   .+.                               \n";
+    cout << "                                 ..%.        .+%#:%#------****------#%-#%*.   .+:     ..*.                              \n";
+    cout << "                                   :=.           :#=-------+=-------=*-      .=-.       .=*..                           \n";
+    cout << "                             ..... .+:...*:      -*=-----------------+=..   ..*.......... .+:..                         \n";
+    cout << "                           ..-#=%+.+%+%+*=% .. ..%%=-::::::::::::::--#%..   ..*-#=%=.*%=#:. %..                         \n";
+    cout << "                           .#===##-##=+#=-==.. .-**+-::::::::::::::-=#*-.   ..#=++##-##++=#.#..                         \n";
+    cout << "                       ......-%**%#%+*%==--%...=**=-+::::::::::::::=+=+#=......*%**%*#*#%-..=..                         \n";
+    cout << "                       .:*++++++*+=-*-#===-=+#==+#=---::::::::::::---=*+=-%=------+==++::::-=#.                         \n";
+    cout << "                       .:#++++++*+==*+#===--++===#=----::::::::::----=#===++------*++++-----=#.                         \n";
+    cout << "                       .:#######%#####%#===--*===+#=----:::::::::---=#+===+##################*                          \n";
+    cout << "                        .:#+++++#+==*%+===---#====#+==--::::::::---=+#===-#.+-----*++++----=%..                         \n";
+    cout << "                         :#+++++*+==*+#*===---#===+%+==--+::::+--===%+===#..+-----*++++----=%..                         \n";
+    cout << "                         :#+++++*+==*++*%#+=---+*==+*==--=*--*+--==*+==++...+-----*++++----=%..                         \n";
+    cout << "                         :#+++++*+==*++*#=====#+===##+=---%--#=--=+##==++#..*-----*++++----=%..                         \n";
+    cout << "                         :#*****#*++#*****%#*#+===#-------%--#=------#===+*.*=====*****=====%..                         \n";
+    cout << "                     ..::-%#######**#######---*#**%*====+%####%+====+%**##--#*****#**##*****%:::..                      \n";
+    cout << "                     ...:------------------------------------------:--------------------------:...                      \n";
+    cout << "                                        .......................................                                             \n";
+    cout << "                                             ..      .............. .......                                             \n";
+
+	cout << "\n\nHAPPY BIRTHDAY!\n\n";
+
+}
+// Show Pet Stats
+void showPetStats(string *petName, int *petAge, int *petHunger){
+	cout << "\n\n ******** Virtual PET STATISTICS ********\n\n";
+	cout << "Name: " << *petName << endl;
+	cout << "Hunger Level: " << *petHunger << endl;
+	cout << "Age: " << *petAge << "\n\n";
 }
